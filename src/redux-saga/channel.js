@@ -1,24 +1,24 @@
 class Channel {
-  currentTask = []
+  currentTask = [];
   constructor() {
-    this.currentTask = []
+    this.currentTask = [];
   }
   take(actionType, taker) {
-    taker.actionType = actionType
+    taker.actionType = actionType;
     taker.cancel = () => {
-      this.currentTask = this.currentTask.filter((t) => t !== taker)
-    }
+      this.currentTask = this.currentTask.filter((t) => t !== taker);
+    };
 
-    this.currentTask.push(taker)
+    this.currentTask.push(taker);
   }
   put(action) {
     this.currentTask.forEach((taker) => {
       if (taker.actionType === action.type) {
-        taker(action)
-        taker.cancel()
+        taker.cancel();
+        taker(action);
       }
-    })
+    });
   }
 }
 
-export default Channel
+export default Channel;
