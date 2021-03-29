@@ -1,4 +1,4 @@
-import { PUT, TAKE, FORK, CALL } from "./effectTypes";
+import { PUT, TAKE, FORK, CALL, CPS, ALL } from "./effectTypes";
 
 export function take(actionType) {
   return {
@@ -39,4 +39,21 @@ export function takeEvery(actionType, saga) {
     }
   }
   return fork(test);
+}
+
+export function cps(fn, ...args) {
+  return {
+    type: CPS,
+    payload: {
+      fn,
+      args,
+    },
+  };
+}
+
+export function all(effects) {
+  return {
+    type: ALL,
+    effects,
+  };
 }
